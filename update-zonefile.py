@@ -49,24 +49,28 @@ lists = [
     {'url': 'http://cybercrime-tracker.net/all.php', 'regex': regex_drop_slash, 'filter': regex_no_comment},
     # Free Ads BL from SquidBlacklist
   #  {'url': 'http://www.squidblacklist.org/downloads/dg-ads.acl', 'filter': regex_no_comment},
-    
+
     # Disconnect.me
     {'url': 'https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt', 'regex': regex_skip_space, 'filter': regex_no_comment},
     {'url': 'https://s3.amazonaws.com/lists.disconnect.me/simple_malware.txt', 'regex': regex_skip_space,'filter': regex_no_comment},
     {'url': 'https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt', 'filter': regex_no_comment},
     {'url': 'https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt', 'filter': regex_no_comment},
-    
+
     # Tracking & Telemetry & Advertising
     {'url': 'https://v.firebog.net/hosts/Easyprivacy.txt', 'filter': regex_no_comment},
     {'url': 'https://v.firebog.net/hosts/Easylist.txt', 'filter': regex_no_comment},
     {'url': 'https://v.firebog.net/hosts/AdguardDNS.txt', 'filter': regex_no_comment},
-    
+
     # Malicious list
     {'url': 'http://v.firebog.net/hosts/Shalla-mal.txt', 'filter': regex_no_comment},
     {'url': 'https://v.firebog.net/hosts/Cybercrime.txt', 'filter': regex_no_comment},
     {'url': 'https://v.firebog.net/hosts/APT1Rep.txt', 'filter': regex_no_comment},
     {'url': 'http://www.joewein.net/dl/bl/dom-bl.txt', 'regex': regex_drop_semicolon, 'filter': regex_no_comment},
-    {'url': 'https://isc.sans.edu/feeds/suspiciousdomains_Medium.txt', 'filter': regex_no_comment}
+    {'url': 'https://isc.sans.edu/feeds/suspiciousdomains_Medium.txt', 'filter': regex_no_comment},
+
+    #phishing list
+    {'url': ''https://raw.githubusercontent.com/cristianmenghi/BIND-SinkHole/main/lista-negra.txt, 'regex': regex_drop_semicolon, 'filter': regex_no_comment}
+
 ]
 
 def download_list(url):
@@ -90,14 +94,14 @@ def download_list(url):
         if r.status_code == 200:
             with cache.open('w') as f:
                 f.write(r.text)
-            
+
             if 'last-modified' in r.headers:
                 last_modified = eut.parsedate_to_datetime(r.headers['last-modified']).timestamp()
                 os.utime(str(cache), times=(last_modified, last_modified))
 
             return r.text
         elif r.status_code != 304:
-            print("Error getting list at " + url + " HTTP STATUS:" + str(r.status_code))        
+            print("Error getting list at " + url + " HTTP STATUS:" + str(r.status_code))
     except requests.exceptions.RequestException as e:
         print(e)
 
@@ -211,5 +215,5 @@ with Path(zonefile).open('a') as f:
         f.write(d + ' IN CNAME drop.sinkhole.\n')
         if config['wildcard_block']:
             f.write('*.' + d + ' IN CNAME drop.sinkhole.\n')
-            
+
 print("Done")
