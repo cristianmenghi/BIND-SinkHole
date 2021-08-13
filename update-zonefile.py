@@ -69,7 +69,7 @@ lists = [
     {'url': 'https://isc.sans.edu/feeds/suspiciousdomains_Medium.txt', 'filter': regex_no_comment},
 
     #phishing list
-    {'url': ''https://raw.githubusercontent.com/cristianmenghi/BIND-SinkHole/main/lista-negra.txt, 'regex': regex_drop_semicolon, 'filter': regex_no_comment}
+    {'url': 'https://raw.githubusercontent.com/cristianmenghi/BIND-SinkHole/main/lista-negra.txt', 'regex': regex_drop_semicolon, 'filter': regex_no_comment}
 
 ]
 
