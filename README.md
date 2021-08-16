@@ -8,12 +8,7 @@ Domain Name Service Response Policy Zones (DNS RPZ) is a method that allows a na
 
 RPZ actions are evaluated before the Resolver replies back to the client.
 
-`[client] ---> [DNS Resolver]  <---> [RPZ Policies]  <---> [DNS Cache | DNS Authoritative]
-
-       ^               |		                (Drop request)
-      |_________|        		        (return NXDOMAIN)
-                                        	     (change IP)
-`
+[client] ---> [DNS Resolver]  <---> [RPZ Policies]  <---> [DNS Cache | DNS Authoritative]
 
 #### 1
 edit /etc/named.conf
