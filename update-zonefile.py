@@ -1,5 +1,24 @@
 #!/usr/bin/python3
 
+'''
+Copyright (c) 2018 Daniel Triendl <daniel@pew.cc>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
+
 import requests
 from pathlib import Path
 from datetime import datetime
@@ -30,25 +49,18 @@ regex_drop_slash = "(?P<domain>[^(\/)?]*)"
 
 lists = [
     {'url': 'https://pgl.yoyo.org/as/serverlist.php?hostformat=nohtml&showintro=0', 'filter': regex_no_comment},
-#    {'url': 'http://mirror1.malwaredomains.com/files/justdomains', 'filter': regex_no_comment},
     {'url': 'http://winhelp2002.mvps.org/hosts.txt', 'regex': regex_domain, 'filter': regex_no_comment},
     {'url': 'https://adaway.org/hosts.txt', 'regex': regex_domain, 'filter': regex_no_comment},
     {'url': 'http://someonewhocares.org/hosts/zero/hosts', 'regex': regex_domain, 'filter': regex_no_comment},
-#    {'url': 'http://www.malwaredomainlist.com/hostslist/hosts.txt', 'regex': regex_domain, 'filter': regex_no_comment},
     # StevenBlack's list
     {'url': 'https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts', 'regex': regex_domain, 'filter': regex_no_comment},
     # Cameleon
     {'url': 'http://sysctl.org/cameleon/hosts', 'regex': regex_domain, 'filter': regex_no_comment},
-    # Zeustracker
- #   {'url': 'https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist', 'filter': regex_no_comment},
-    # hpHosts
- #   {'url': 'https://hosts-file.net/download/hosts.txt', 'regex': regex_domain, 'filter': regex_no_comment},
+
     # OpenPhish
     {'url': 'https://openphish.com/feed.txt', 'regex': regex_domain_only, 'filter': regex_no_comment},
     # CyberCrime tracker
     {'url': 'http://cybercrime-tracker.net/all.php', 'regex': regex_drop_slash, 'filter': regex_no_comment},
-    # Free Ads BL from SquidBlacklist
-  #  {'url': 'http://www.squidblacklist.org/downloads/dg-ads.acl', 'filter': regex_no_comment},
 
     # Disconnect.me
     {'url': 'https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt', 'regex': regex_skip_space, 'filter': regex_no_comment},
