@@ -1,1 +1,2 @@
 typeform.com
+*.typeform.com
